@@ -1,0 +1,5 @@
+{
+  "tasks": {
+    "dev": "deno run --allow-run --allow-net --allow-read --allow-env https://deno.land/x/live_reload@0.0.3/reload.ts --main=src/server.ts"
+  }
+}
