@@ -9,8 +9,15 @@ export const parseJavascript = async (ctx: Context) => {
 
   const { code } = (await body.value) as ParseBody;
 
+  const tempPath = await Deno.makeTempDir();
+
+  const file = await Deno.create(tempPath + "/temp.ts");
+
+  await file.write(textEncoder.encode(code));
+  file.close();
+
   const resp = Deno.run({
-    cmd: [`deno`, `eval`, code],
+    cmd: [`deno`, `run`, tempPath + "/temp.ts"],
     stdout: "piped",
   });
 
